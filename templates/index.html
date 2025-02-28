@@ -3,52 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Generator</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>GitHub Profile Info</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Resume Generator</h1>
-        <div class="resume">
-            <p><strong>Name:</strong> <span id="name">{{ resume.name }}</span></p>
-            <p><strong>Job Position:</strong> <span id="job_position">{{ resume.job_position }}</span></p>
-            <p><strong>Work Place:</strong> <span id="work_place">{{ resume.work_place }}</span></p>
-            <p><strong>Skills:</strong> <span id="skills">{{ resume.skills }}</span></p>
-            <p><strong>Experience:</strong> <span id="experience">{{ resume.experience }}</span></p>
-            <p><strong>Education:</strong> <span id="education">{{ resume.education }}</span></p>
+        <h1>GitHub Profile Info</h1>
+        <div id="profile-info">
+            <p><strong>Name:</strong> <span id="name">{{ data.name }}</span></p>
+            <p><strong>Email:</strong> <span id="email">{{ data.email }}</span></p>
+            <p><strong>Login:</strong> <span id="login">{{ data.login }}</span></p>
+            <p><strong>Location:</strong> <span id="location">{{ data.location }}</span></p>
+            <p><strong>Bio:</strong> <span id="bio">{{ data.bio }}</span></p>
+            <p><strong>Stars:</strong> <span id="stars">{{ data.stars }}</span></p>
+            <p><strong>Commits:</strong> <span id="commits">{{ data.commits }}</span></p>
+            <p><strong>Repos:</strong> <span id="repos">{{ data.repos }}</span></p>
+            <p><strong>Followers:</strong> <span id="followers">{{ data.followers }}</span></p>
+            <p><strong>Following:</strong> <span id="following">{{ data.following }}</span></p>
         </div>
-        <div class="mt-5">
-            <h2>Update Resume</h2>
-            <form id="resume-form">
-                <div class="form-group">
-                    <label for="name-input">Name</label>
-                    <input type="text" id="name-input" class="form-control" value="{{ resume.name }}">
-                </div>
-                <div class="form-group">
-                    <label for="job_position-input">Job Position</label>
-                    <input type="text" id="job_position-input" class="form-control" value="{{ resume.job_position }}">
-                </div>
-                <div class="form-group">
-                    <label for="work_place-input">Work Place</label>
-                    <input type="text" id="work_place-input" class="form-control" value="{{ resume.work_place }}">
-                </div>
-                <div class="form-group">
-                    <label for="skills-input">Skills</label>
-                    <input type="text" id="skills-input" class="form-control" value="{{ resume.skills }}">
-                </div>
-                <div class="form-group">
-                    <label for="experience-input">Experience</label>
-                    <input type="text" id="experience-input" class="form-control" value="{{ resume.experience }}">
-                </div>
-                <div class="form-group">
-                    <label for="education-input">Education</label>
-                    <input type="text" id="education-input" class="form-control" value="{{ resume.education }}">
-                </div>
-                <button type="button" class="btn btn-primary" onclick="updateResume()">Update Resume</button>
-            </form>
-        </div>
+        <form id="update-form" class="mt-4">
+            <div class="mb-3">
+                <label for="username" class="form-label">Enter GitHub Username:</label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

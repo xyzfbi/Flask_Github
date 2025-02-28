@@ -1,20 +1,27 @@
 from flask import Flask, render_template, request, jsonify
-import random
 import os
-from src import script
+from src import resume_generator
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    resume = script.generate_random_resume()
-    script.save_resume(resume)
-    return render_template('index.html', resume=resume)
+    # При первом запуске отображаем информацию о профиле xyzfbi
+    username = "xyzfbi"
+    resume_data = resume_generator.generate_resume(username)
+    return render_template('index.html', data=resume_data)
 
-@app.route('/update', methods=['POST'])
-def update_resume():
-    data = request.json
-    script.save_resume(data)
-    return jsonify({"status": "success"})
+@app.route('/update_profile', methods=['POST'])
+def update_profile():
+    username = request.json.get('username')
+    if not username:
+        return jsonify({"error": "Username is required"}), 400
+
+    try:
+        resume_data = resume_generator.generate_resume(username)
+        return jsonify(resume_data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='localhost', port=8080, debug=True)
