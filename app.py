@@ -16,7 +16,6 @@ def update_profile():
     username = request.json.get('username')
     if not username:
         return jsonify({"error": "Username is required"}), 400
-
     try:
         resume_data = resume_generator.generate_resume(username)
         return jsonify(resume_data)
