@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, jsonify
-import os
 from src import resume_generator
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # При первом запуске отображаем информацию о профиле xyzfbi
     username = "xyzfbi"
     resume_data = resume_generator.generate_resume(username)
     return render_template('index.html', data=resume_data)
