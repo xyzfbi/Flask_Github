@@ -3,17 +3,20 @@ from src import github_api
 
 RESUME_FILE_PATH = os.path.join('data', 'resume.txt')
 
+
+
+
 def generate_resume(username):
     profile_stats = github_api.get_profile_stats(username)
     stars = github_api.get_user_stars(username)
     commits = github_api.get_user_commits(username)
 
     data = {
-        "name": profile_stats.get("name", ""),
-        "email": profile_stats.get("email", ""),
-        "login": profile_stats.get("login", ""),
-        "location": profile_stats.get("location", ""),
-        "bio": profile_stats.get("bio", ""),
+        "name": profile_stats.get("name", "None"),
+        "email": profile_stats.get("email", "None"),
+        "login": profile_stats.get("login", "None"),
+        "location": profile_stats.get("location", "None"),
+        "bio": profile_stats.get("bio", "None"),
         "stars": stars,
         "commits": commits,
         "repos": profile_stats.get('public_repos', 0),

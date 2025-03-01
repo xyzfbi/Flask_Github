@@ -10,6 +10,14 @@ HEADERS = {"Authorization": f"Bearer {TOKEN}",
 if not TOKEN:
     raise ValueError("API_KEY environment variable is not set. Check again README.md file for instructions.")
 
+
+def get_github_username():
+    user_url = 'https://api.github.com/user'
+    response = requests.get(user_url, headers=HEADERS, timeout=5)
+    if response.status_code != 200:
+        raise ValueError(f"{response.status_code}: {response.text}")
+    return response.json()['login']
+
 def get_profile_stats(username):
     url = f"https://api.github.com/users/{username}"
     response = requests.get(url, headers=HEADERS, timeout=5)

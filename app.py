@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, jsonify
-from src import resume_generator
+from src import resume_generator, github_api
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    username = "xyzfbi"
+    username = github_api.get_github_username()
     resume_data = resume_generator.generate_resume(username)
     return render_template('index.html', data=resume_data)
 
