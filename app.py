@@ -9,7 +9,6 @@ def index():
     resume_data = resume_generator.generate_resume(username)
     return render_template('index.html', data=resume_data)
 
-
 @app.route('/update_profile', methods=['POST'])
 def update_profile():
     username = request.json.get('username')
